@@ -8,7 +8,7 @@ pygame.init()
 # Set ukuran layar
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Space Shooter (Tanpa Gambar)")
+pygame.display.set_caption("Space Shooter")
 
 # Warna
 BLACK = (0, 0, 0)
@@ -66,14 +66,12 @@ class Bullet:
 player = Player()
 enemies = [Enemy()]
 bullets = []
-
-# Waktu terakhir menembak
-last_shot = time.time()
+last_shot = time.time()  # Waktu terakhir menembak
 
 # Loop utama
 running = True
 while running:
-    pygame.time.delay(30)  # Delay untuk mengontrol kecepatan game
+    pygame.time.delay(30)
     screen.fill(BLACK)
 
     # Cek event (misalnya tombol keluar)
@@ -81,7 +79,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # Cek input keyboard
+    # Cek input keyboard untuk gerakan pesawat
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         player.move("left")
@@ -93,7 +91,7 @@ while running:
         bullets.append(Bullet(player.x + player.width // 2, player.y))
         last_shot = time.time()
 
-    # Update dan gambar semua peluru
+    # Update & gambar semua peluru
     for bullet in bullets:
         bullet.move()
         bullet.draw()
@@ -102,10 +100,10 @@ while running:
     for bullet in bullets[:]:
         for enemy in enemies[:]:
             if (enemy.x < bullet.x < enemy.x + enemy.width) and (enemy.y < bullet.y < enemy.y + enemy.height):
-                enemies.remove(enemy)  # Musuh hilang jika kena peluru
-                bullets.remove(bullet)  # Peluru juga hilang
+                enemies.remove(enemy)
+                bullets.remove(bullet)
 
-    # Update dan gambar musuh
+    # Update & gambar musuh
     for enemy in enemies:
         enemy.draw()
 
