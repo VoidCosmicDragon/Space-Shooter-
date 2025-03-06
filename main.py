@@ -110,4 +110,10 @@ while running:
     player.draw()
     pygame.display.update()
 
-pygame.quit()
+def move(self, direction):
+    if direction == "left" and self.x > 0:
+        self.x -= self.speed
+    if direction == "right" and self.x < WIDTH - self.width:
+        self.x += self.speed
+pygame.exit
+
